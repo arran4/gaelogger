@@ -11,6 +11,7 @@ import (
 )
 
 type backLogger interface {
+	io.Closer
 	logf(severity fmt.Stringer, format string, args ...interface{})
 }
 
@@ -54,6 +55,10 @@ type StdLogger struct {
 	logger *log.Logger
 }
 
+func (st *StdLogger) Close() error {
+	return nil
+}
+
 func (st *StdLogger) logf(severity fmt.Stringer, format string, args ...interface{}) {
 	st.logger.SetPrefix(severity.String())
 	st.logger.Output(4, fmt.Sprintf(format, args...))
@@ -90,7 +95,6 @@ func (gl *GaeLogger) logf(severity fmt.Stringer, format string, args ...interfac
 
 type WrapLogger struct {
 	backLogger
-	io.Closer
 }
 
 func (gl WrapLogger) Defaultf(format string, args ...interface{}) {

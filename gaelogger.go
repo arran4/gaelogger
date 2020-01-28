@@ -2,6 +2,7 @@ package gaelogger
 
 import (
 	"cloud.google.com/go/logging"
+	"context"
 	"fmt"
 	"io"
 	"log"
@@ -30,7 +31,13 @@ type Logger interface {
 
 func NewLogger(r *http.Request) Logger {
 	if len(os.Getenv("GOOGLE_CLOUD_PROJECT")) > 0 {
-		loggingClient, err := logging.NewClient(r.Context(), os.Getenv("GOOGLE_CLOUD_PROJECT"))
+		var ctx context.Context
+		if r != nil {
+			ctx = r.Context()
+		} else {
+			ctx = context.Background()
+		}
+		loggingClient, err := logging.NewClient(ctx, os.Getenv("GOOGLE_CLOUD_PROJECT"))
 		if err != nil {
 			log.Fatalf("Failed to create client: %v", err)
 		}

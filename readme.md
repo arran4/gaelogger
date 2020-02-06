@@ -12,7 +12,7 @@ func init() {
 }
 
 func handle(writer http.ResponseWriter, request *http.Request) {
-  logger := gaelogger.NewGaeLogger(request)
+  logger := gaelogger.NewLogger(request)
   defer logger.Close()
   logger.Infof("%s request: %v %v", request.Method, request.URL.RawPath, request.URL.RawQuery)
 }

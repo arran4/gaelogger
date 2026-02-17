@@ -67,8 +67,8 @@ func (st *StdLogger) Close() error {
 }
 
 func (st *StdLogger) logf(severity fmt.Stringer, format string, args ...interface{}) {
-	st.logger.SetPrefix(severity.String()+" ")
-	st.logger.Output(3, fmt.Sprintf(format, args...))
+	st.logger.SetPrefix(severity.String() + " ")
+	_ = st.logger.Output(3, fmt.Sprintf(format, args...))
 	st.logger.SetPrefix("")
 }
 

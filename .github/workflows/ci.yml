@@ -28,6 +28,14 @@ jobs:
         with:
           go-version: '1.27.x'
           cache: false
+      - name: Verify gofmt formatting
+        shell: bash
+        run: |
+          unformatted="$(gofmt -l .)"
+          if [[ -n "$unformatted" ]]; then
+            echo "$unformatted"
+            exit 1
+          fi
       - name: Verify dependency integrity
         run: |
           go mod verify

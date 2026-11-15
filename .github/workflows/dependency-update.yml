@@ -30,6 +30,7 @@ jobs:
           go get cloud.google.com/go/logging@latest
           go get -u ./...
           go mod tidy
+          gofmt -w gaelogger.go gaelogger_test.go
           go mod verify
           go test -race ./...
           go vet ./...
@@ -42,7 +43,7 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add go.mod go.sum
+          git add go.mod go.sum gaelogger.go gaelogger_test.go
           if ! git diff --cached --quiet; then
             git commit -m 'chore(deps): upgrade complete selected Go dependency graph'
             git fetch origin maintenance/dependencies-release-20261115

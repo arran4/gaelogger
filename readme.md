@@ -68,3 +68,11 @@ func handle(writer http.ResponseWriter, request *http.Request) {
   logger.Infof("%s request: %v %v", request.Method, request.URL.RawPath, request.URL.RawQuery)
 }
 ```
+
+## Development and releases
+
+This is a Go library; releases consist of a semantic-version tag and a GitHub Release, not a binary artifact.
+
+Run `go test -race ./...` and `go vet ./...` to check changes locally. CI also checks dependency integrity, module tidiness, linting and secret scanning on every pull request.
+
+To publish a release, update `VERSION` and `CHANGELOG.md` together in a pull request. After the pull request is merged into `master`, the CI workflow verifies the merge commit before publishing the corresponding `v`-prefixed release. Regular commits that do not change `VERSION` do not create new releases. Releases are not published when required checks fail.

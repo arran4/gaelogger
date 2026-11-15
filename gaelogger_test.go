@@ -44,7 +44,8 @@ func TestStdLoggerFormatsSeverityAndArguments(t *testing.T) {
       output.Reset()
       tt.write()
       got := output.String()
-      if !strings.Contains(got, tt.name+" message 42") {
+      want := tt.name[:1] + strings.ToLower(tt.name[1:]) + " message 42"
+      if !strings.Contains(got, want) {
         t.Errorf("output %q does not contain expected severity and formatted message", got)
       }
     })

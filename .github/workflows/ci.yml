@@ -2,7 +2,7 @@ name: CI/CD
 
 on:
   push:
-    branches: [main, master]
+    branches: [main, master, 'maintenance/**']
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
     branches: [main, master]

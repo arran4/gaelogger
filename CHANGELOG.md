@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.1 — CI compatibility maintenance
+
+- Update the Gitleaks GitHub Action from v2 to the Node 24-compatible v3, incorporating Dependabot PR #19.
+- Keep the existing Go module dependency set and public logger API unchanged.
+
 ## v0.1.0 — Initial release
 
 - Publish the existing Go logger module as its first tagged release.
